@@ -85,13 +85,13 @@
   .muted  { background: #e0ded8; }
 
   /* Helpfulness */
-  .help-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f1efe8; }
-  .help-row:last-child { border-bottom: none; }
-  .help-label { font-size: 12px; color: #5f5e5a; min-width: 210px; flex-shrink: 0; }
-  .help-track { flex: 1; height: 7px; background: #f1efe8; border-radius: 4px; overflow: hidden; }
+  .help-row { margin-bottom: 14px; }
+  .help-row:last-child { margin-bottom: 0; }
+  .help-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 5px; }
+  .help-label { font-size: 13px; color: #5f5e5a; }
+  .help-track { height: 7px; background: #f1efe8; border-radius: 4px; overflow: hidden; }
   .help-fill { height: 100%; border-radius: 4px; }
-  .help-rating { font-size: 12px; font-weight: 500; min-width: 120px; text-align: right; color: #1a1a18; }
-  @media (max-width: 560px) { .help-label { min-width: 110px; } .help-rating { min-width: 80px; font-size: 11px; } }
+  .help-rating { font-size: 12px; font-weight: 600; color: #1a1a18; white-space: nowrap; }
 
   /* Customer cards */
   .customer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -466,34 +466,46 @@
   <div class="card-full">
     <div class="card-title" data-en="How Much Would Each Improvement Help in Selling / Promoting Scheduling?" data-zh="各改进项对销售 / 推广的帮助程度（综合评级）">How Much Would Each Improvement Help in Selling / Promoting Scheduling?</div>
     <div class="help-row">
-      <span class="help-label" data-en="Add key data visibility" data-zh="增加关键数据可见性">Add key data visibility</span>
+      <div class="help-header">
+        <span class="help-label" data-en="Add key data visibility" data-zh="增加关键数据可见性">Add key data visibility</span>
+        <span class="help-rating" data-en="Extremely helpful" data-zh="非常有帮助">Extremely helpful</span>
+      </div>
       <div class="help-track"><div class="help-fill teal" style="width:95%"></div></div>
-      <span class="help-rating" data-en="Extremely helpful" data-zh="非常有帮助">Extremely helpful</span>
     </div>
     <div class="help-row">
-      <span class="help-label" data-en="Optimize scheduling views" data-zh="优化排班视图">Optimize scheduling views</span>
+      <div class="help-header">
+        <span class="help-label" data-en="Optimize scheduling views" data-zh="优化排班视图">Optimize scheduling views</span>
+        <span class="help-rating" data-en="Extremely helpful" data-zh="非常有帮助">Extremely helpful</span>
+      </div>
       <div class="help-track"><div class="help-fill teal" style="width:90%"></div></div>
-      <span class="help-rating" data-en="Extremely helpful" data-zh="非常有帮助">Extremely helpful</span>
     </div>
     <div class="help-row">
-      <span class="help-label" data-en="Improve shift management experience" data-zh="优化班次管理体验">Improve shift management experience</span>
+      <div class="help-header">
+        <span class="help-label" data-en="Improve shift management experience" data-zh="优化班次管理体验">Improve shift management experience</span>
+        <span class="help-rating" data-en="Very – Extremely" data-zh="很有帮助 – 非常有帮助">Very – Extremely</span>
+      </div>
       <div class="help-track"><div class="help-fill teal" style="width:84%"></div></div>
-      <span class="help-rating" data-en="Very – Extremely" data-zh="很有帮助 – 非常有帮助">Very – Extremely</span>
     </div>
     <div class="help-row">
-      <span class="help-label" data-en="Expand POS integration" data-zh="扩展 POS 集成">Expand POS integration</span>
+      <div class="help-header">
+        <span class="help-label" data-en="Expand POS integration" data-zh="扩展 POS 集成">Expand POS integration</span>
+        <span class="help-rating" data-en="Very – Extremely" data-zh="很有帮助 – 非常有帮助">Very – Extremely</span>
+      </div>
       <div class="help-track"><div class="help-fill teal" style="width:78%"></div></div>
-      <span class="help-rating" data-en="Very – Extremely" data-zh="很有帮助 – 非常有帮助">Very – Extremely</span>
     </div>
     <div class="help-row">
-      <span class="help-label" data-en="Lower configuration barriers" data-zh="降低配置门槛">Lower configuration barriers</span>
+      <div class="help-header">
+        <span class="help-label" data-en="Lower configuration barriers" data-zh="降低配置门槛">Lower configuration barriers</span>
+        <span class="help-rating" data-en="Very helpful" data-zh="很有帮助">Very helpful</span>
+      </div>
       <div class="help-track"><div class="help-fill teal" style="width:68%"></div></div>
-      <span class="help-rating" data-en="Very helpful" data-zh="很有帮助">Very helpful</span>
     </div>
     <div class="help-row">
-      <span class="help-label" data-en="Introduce AI assistance" data-zh="引入 AI 辅助">Introduce AI assistance</span>
+      <div class="help-header">
+        <span class="help-label" data-en="Introduce AI assistance" data-zh="引入 AI 辅助">Introduce AI assistance</span>
+        <span class="help-rating" data-en="Slightly – Moderate" data-zh="略有帮助 – 一般">Slightly – Moderate</span>
+      </div>
       <div class="help-track"><div class="help-fill teal" style="width:36%"></div></div>
-      <span class="help-rating" data-en="Slightly – Moderate" data-zh="略有帮助 – 一般">Slightly – Moderate</span>
     </div>
   </div>
 
