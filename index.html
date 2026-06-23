@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheduling Product Feedback Report — 2026-06-22</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f5f5f3;
+    color: #1a1a18;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  a { color: #185fa5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* Top bar */
+  .top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  .header { flex: 1; }
+  .header-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .badge { display: inline-block; font-size: 12px; padding: 3px 10px; border-radius: 20px; border: 1px solid #d3d1c7; color: #5f5e5a; background: #fff; }
+  h1 { font-size: 26px; font-weight: 600; color: #1a1a18; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #888780; }
+
+  /* Lang toggle */
+  .lang-toggle { display: flex; border: 1px solid #d3d1c7; border-radius: 8px; overflow: hidden; flex-shrink: 0; margin-top: 4px; }
+  .lang-btn { padding: 6px 14px; font-size: 13px; cursor: pointer; border: none; background: #fff; color: #888780; font-family: inherit; transition: background 0.15s, color 0.15s; }
+  .lang-btn.active { background: #1a1a18; color: #fff; }
+  .lang-btn:first-child { border-right: 1px solid #d3d1c7; }
+
+  /* Action bar */
+  .action-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 8px 16px; border-radius: 8px; border: 1px solid #d3d1c7; background: #fff; color: #1a1a18; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.15s; }
+  .btn:hover { background: #f1efe8; text-decoration: none; }
+  .btn-primary { background: #1a1a18; color: #fff; border-color: #1a1a18; }
+  .btn-primary:hover { background: #333; }
+
+  /* Key Findings */
+  .findings-section { background: #fff; border: 1px solid #e0ded8; border-radius: 12px; padding: 24px 28px; margin-bottom: 32px; }
+  .findings-heading { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b4b2a9; margin-bottom: 20px; }
+  .finding-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f1efe8; }
+  .finding-item:first-of-type { padding-top: 0; }
+  .finding-item:last-of-type { border-bottom: none; padding-bottom: 0; }
+  .finding-num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: #1a1a18; color: #fff; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .finding-body { flex: 1; }
+  .finding-title { font-size: 14px; font-weight: 600; color: #1a1a18; margin-bottom: 4px; }
+  .finding-desc { font-size: 13px; color: #5f5e5a; line-height: 1.6; }
+
+  .divider { height: 1px; background: #d3d1c7; margin: 28px 0; }
+  .section-heading { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b4b2a9; margin-bottom: 16px; }
+
+  /* Stat cards */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .stat-card { background: #fff; border: 1px solid #e0ded8; border-radius: 12px; padding: 20px; text-align: center; }
+  .stat-label { font-size: 12px; color: #888780; margin-bottom: 6px; }
+  .stat-value { font-size: 32px; font-weight: 600; color: #1a1a18; line-height: 1.1; }
+  .stat-sub { font-size: 12px; color: #b4b2a9; margin-top: 4px; }
+
+  /* Card grid */
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  @media (max-width: 620px) { .card-grid { grid-template-columns: 1fr; } }
+  .card { background: #fff; border: 1px solid #e0ded8; border-radius: 12px; padding: 20px 22px; }
+  .card-full { background: #fff; border: 1px solid #e0ded8; border-radius: 12px; padding: 20px 22px; margin-bottom: 20px; }
+  .card-title { font-size: 13px; font-weight: 500; color: #5f5e5a; margin-bottom: 16px; }
+
+  /* Bar rows */
+  .bar-row { margin-bottom: 14px; }
+  .bar-row:last-child { margin-bottom: 0; }
+  .bar-label { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 5px; }
+  .bar-text { flex: 1; }
+  .bar-main { display: block; font-size: 12px; color: #1a1a18; line-height: 1.4; }
+  .bar-sub  { display: block; font-size: 11px; color: #b4b2a9; line-height: 1.4; margin-top: 1px; }
+  .bar-main.zero { color: #b4b2a9; }
+  .bar-count { font-size: 12px; font-weight: 600; white-space: nowrap; color: #1a1a18; padding-top: 1px; }
+  .bar-count.zero { color: #b4b2a9; font-weight: 400; }
+  .bar-track { height: 5px; background: #f1efe8; border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .teal   { background: #1D9E75; }
+  .purple { background: #7F77DD; }
+  .blue   { background: #378ADD; }
+  .amber  { background: #EF9F27; }
+  .muted  { background: #e0ded8; }
+
+  /* Helpfulness */
+  .help-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f1efe8; }
+  .help-row:last-child { border-bottom: none; }
+  .help-label { font-size: 12px; color: #5f5e5a; min-width: 210px; flex-shrink: 0; }
+  .help-track { flex: 1; height: 7px; background: #f1efe8; border-radius: 4px; overflow: hidden; }
+  .help-fill { height: 100%; border-radius: 4px; }
+  .help-rating { font-size: 12px; font-weight: 500; min-width: 120px; text-align: right; color: #1a1a18; }
+  @media (max-width: 560px) { .help-label { min-width: 110px; } .help-rating { min-width: 80px; font-size: 11px; } }
+
+  /* Customer cards */
+  .customer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 500px) { .customer-grid { grid-template-columns: 1fr; } }
+  .customer-card { background: #f5f5f3; border-radius: 12px; padding: 20px; }
+  .customer-loc-row { display: flex; align-items: baseline; gap: 5px; margin-bottom: 10px; }
+  .customer-loc-num { font-size: 40px; font-weight: 700; color: #1a1a18; line-height: 1; }
+  .customer-loc-unit { font-size: 13px; color: #888780; }
+  .customer-name { font-size: 15px; font-weight: 600; color: #1a1a18; margin-bottom: 4px; }
+  .customer-meta { font-size: 12px; color: #888780; }
+  .customer-revenue { display: inline-block; margin-top: 8px; font-size: 12px; padding: 2px 8px; border-radius: 4px; background: #fff; border: 1px solid #e0ded8; color: #5f5e5a; }
+
+  /* Footer */
+  .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid #d3d1c7; font-size: 12px; color: #b4b2a9; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="header">
+      <div class="header-meta">
+        <span class="badge">2026-06-22</span>
+        <span class="badge" data-en="CIS Team Survey" data-zh="CIS 团队问卷">CIS Team Survey</span>
+        <span class="badge">n = 5</span>
+      </div>
+      <h1 data-en="Scheduling Product Feedback Report" data-zh="Scheduling 产品反馈报告">Scheduling Product Feedback Report</h1>
+      <p class="subtitle" data-en="CIS team survey on confidence in selling and implementing the Scheduling product" data-zh="基于 CIS 团队对 Scheduling 产品销售与落地信心的调查结果">CIS team survey on confidence in selling and implementing the Scheduling product</p>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en', this)">EN</button>
+      <button class="lang-btn" onclick="setLang('zh', this)">中文</button>
+    </div>
+  </div>
+
+  <!-- Action bar -->
+  <div class="action-bar">
+    <a href="https://tally.so/r/eqojyk" target="_blank" class="btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      <span data-en="View Survey (Tally)" data-zh="查看原始问卷（Tally）">View Survey (Tally)</span>
+    </a>
+    <button class="btn btn-primary" onclick="downloadCSV()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span data-en="Download Raw Data CSV" data-zh="下载原始数据 CSV">Download Raw Data CSV</span>
+    </button>
+  </div>
+
+  <!-- Key Findings -->
+  <div class="findings-section">
+    <div class="findings-heading" data-en="KEY FINDINGS" data-zh="核心发现">KEY FINDINGS</div>
+
+    <!-- EN version -->
+    <div class="findings-en">
+      <div class="finding-item">
+        <div class="finding-num">1</div>
+        <div class="finding-body">
+          <div class="finding-title">Overall confidence is moderate (6.2/10), held back by missing features and workflow gaps</div>
+          <div class="finding-desc">80% of CIS flagged missing features and broken workflows as the top barrier — the product isn't ready for competitive deals yet.</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">2</div>
+        <div class="finding-body">
+          <div class="finding-title">Shift Management is the module most impacting sales confidence</div>
+          <div class="finding-desc">4/5 respondents flagged Shift Management (e.g. Shift Swapping, Open Shift management) as the primary drag on sales confidence. Shift data display &amp; analytics (3/5) and scheduling view UX (drag-and-drop, monthly view, grouping) were also frequently cited.</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">3</div>
+        <div class="finding-body">
+          <div class="finding-title">POS integration, Shift Management, and scheduling views are the top three improvement priorities</div>
+          <div class="finding-desc">CIS ranked these three as the most urgent (4/5, 3/5, 3/5) — the most direct path to boosting sales confidence.</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">4</div>
+        <div class="finding-body">
+          <div class="finding-title">Scheduling–Payroll integration and POS integration are the top two differentiating selling points</div>
+          <div class="finding-desc">Both were cited by 4/5 respondents, tied at first — a reference point for future differentiation strategy.</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">5</div>
+        <div class="finding-body">
+          <div class="finding-title">AI assistance is a lower priority — better suited as a mid-to-long-term direction</div>
+          <div class="finding-desc">AI ranked last in both helpfulness ratings and improvement votes (1/5) — the team sees core capability gaps as the nearer-term priority.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZH version -->
+    <div class="findings-zh" style="display:none">
+      <div class="finding-item">
+        <div class="finding-num">1</div>
+        <div class="finding-body">
+          <div class="finding-title">整体信心偏中等（6.2/10），主要卡在功能与流程的缺失上</div>
+          <div class="finding-desc">80% 的 CIS 指出功能缺失与流程断点是最大障碍，产品当前还不够"能打硬仗"。</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">2</div>
+        <div class="finding-body">
+          <div class="finding-title">Shift Management 是最影响销售信心的核心模块</div>
+          <div class="finding-desc">4/5 人将 Shift Management（如：Shift Swapping、Open Shift 管理）列为核心痛点，是拖累销售信心的主因。班次数据展示与分析（3/5）、排班视图体验（拖拽、月视图、分组）也被高频提及。</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">3</div>
+        <div class="finding-body">
+          <div class="finding-title">POS 集成、Shift Management 与排班视图是当前三大重点改进方向</div>
+          <div class="finding-desc">CIS 将这三项列为最迫切的改进方向（4/5、3/5、3/5），是提升销售信心最直接的突破口。</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">4</div>
+        <div class="finding-body">
+          <div class="finding-title">Scheduling–Payroll 深度集成与 POS 集成，是最被看好的两大差异化卖点</div>
+          <div class="finding-desc">两者均获 4/5 CIS 票选，并列第一，可作为差异化布局的参考方向。</div>
+        </div>
+      </div>
+      <div class="finding-item">
+        <div class="finding-num">5</div>
+        <div class="finding-body">
+          <div class="finding-title">AI 辅助当前优先级较低，更适合作为中长期方向来布局</div>
+          <div class="finding-desc">AI 在帮助程度和改进方向票选中均排末位（1/5），团队共识是先补齐核心能力，AI 更适合中长期布局。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="section-heading" data-en="OVERVIEW" data-zh="总览">OVERVIEW</div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label" data-en="Respondents" data-zh="受访人数">Respondents</div>
+      <div class="stat-value">5</div>
+      <div class="stat-sub" data-en="All CIS role" data-zh="全部为 CIS 角色">All CIS role</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label" data-en="Avg. Confidence Score" data-zh="平均销售信心分">Avg. Confidence Score</div>
+      <div class="stat-value">6.2</div>
+      <div class="stat-sub" data-en="out of 10" data-zh="满分 10 分">out of 10</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label" data-en="With Potential Customers" data-zh="有潜在客户线索">With Potential Customers</div>
+      <div class="stat-value">2 / 5</div>
+      <div class="stat-sub">Dream Bean · Bacus Foods</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label" data-en="Largest Lead Scale" data-zh="最大客户门店规模">Largest Lead Scale</div>
+      <div class="stat-value">37</div>
+      <div class="stat-sub" data-en="locations (Bacus Foods Corp)" data-zh="门店（Bacus Foods Corp）">locations (Bacus Foods Corp)</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-heading" data-en="DETAILS" data-zh="详细数据">DETAILS</div>
+
+  <!-- Q1 + Q2 -->
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title" data-en="Confidence Barriers — Main Factors (up to 2)" data-zh="信心障碍 — 主要因素（可多选，最多 2 项）">Confidence Barriers — Main Factors (up to 2)</div>
+
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Missing core features and blocked workflows" data-zh="缺少核心功能 / 流程断点">Missing core features and blocked workflows</span></span>
+          <span class="bar-count">4 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:80%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="The tool experience is not good enough" data-zh="产品体验不够好">The tool experience is not good enough</span></span>
+          <span class="bar-count">3 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:60%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Lack of sufficient differentiated selling points" data-zh="缺乏足够的差异化卖点">Lack of sufficient differentiated selling points</span></span>
+          <span class="bar-count">1 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:20%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Other: Lack of resources to demo and teach the product" data-zh="其他：缺乏 demo 和产品培训资源">Other: Lack of resources to demo and teach the product</span></span>
+          <span class="bar-count">1 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill teal" style="width:20%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main zero" data-en="High system configuration and rollout costs" data-zh="系统配置和上线成本高">High system configuration and rollout costs</span></span>
+          <span class="bar-count zero">0 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill muted" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" data-en="Most Problematic Business Modules" data-zh="问题最集中的业务模块">Most Problematic Business Modules</div>
+
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Shift management (Open Shift management, Shift Swapping)" data-zh="班次管理（Open Shift 管理、换班）">Shift management (Open Shift management, Shift Swapping)</span></span>
+          <span class="bar-count">4 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill purple" style="width:80%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Shift data display &amp; analytics" data-zh="班次数据展示与分析">Shift data display &amp; analytics</span></span>
+          <span class="bar-count">3 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill purple" style="width:60%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Schedule creation" data-zh="排班创建">Schedule creation</span></span>
+          <span class="bar-count">2 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill purple" style="width:40%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Time clock &amp; attendance" data-zh="打卡与考勤">Time clock &amp; attendance</span></span>
+          <span class="bar-count">1 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill purple" style="width:20%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Timesheet approval" data-zh="工时单审批">Timesheet approval</span></span>
+          <span class="bar-count">1 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill purple" style="width:20%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Other: Notifications" data-zh="其他：通知">Other: Notifications</span></span>
+          <span class="bar-count">1 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill purple" style="width:20%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 + Q4 -->
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title" data-en="Most Urgent Improvement Areas (pick top 3)" data-zh="最优先的改进方向（每人选 3 项）">Most Urgent Improvement Areas (pick top 3)</div>
+
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text">
+            <span class="bar-main" data-en="Expand POS integration" data-zh="扩展 POS 集成">Expand POS integration</span>
+            <span class="bar-sub" data-en="introduce store sales and labor data" data-zh="引入门店销售和人力数据">introduce store sales and labor data</span>
+          </span>
+          <span class="bar-count">4 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:80%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text">
+            <span class="bar-main" data-en="Improve shift management experience" data-zh="优化班次管理体验">Improve shift management experience</span>
+            <span class="bar-sub" data-en="Open Shift/overtime notifications, allow fast Shift Swapping" data-zh="Open Shift / 加班通知，支持快速换班">Open Shift/overtime notifications, allow fast Shift Swapping</span>
+          </span>
+          <span class="bar-count">3 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:60%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text">
+            <span class="bar-main" data-en="Optimize scheduling views" data-zh="优化排班视图">Optimize scheduling views</span>
+            <span class="bar-sub" data-en="support drag-and-drop, add monthly view and grouping" data-zh="支持拖拽，增加月视图和分组">support drag-and-drop, add monthly view and grouping</span>
+          </span>
+          <span class="bar-count">3 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:60%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text">
+            <span class="bar-main" data-en="Add key data visibility" data-zh="增加关键数据可见性">Add key data visibility</span>
+            <span class="bar-sub" data-en="real-time hours tracking and summary" data-zh="实时工时追踪与汇总">real-time hours tracking and summary</span>
+          </span>
+          <span class="bar-count">2 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:40%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text">
+            <span class="bar-main" data-en="Lower configuration barriers" data-zh="降低配置门槛">Lower configuration barriers</span>
+            <span class="bar-sub" data-en="one-click multi-location setup, self-serve configuration" data-zh="一键多门店配置，自助上线">one-click multi-location setup, self-serve configuration</span>
+          </span>
+          <span class="bar-count">2 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:40%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text">
+            <span class="bar-main" data-en="Introduce AI assistance" data-zh="引入 AI 辅助">Introduce AI assistance</span>
+            <span class="bar-sub" data-en="AI-powered queries and auto-scheduling suggestions" data-zh="AI 智能查询与自动排班建议">AI-powered queries and auto-scheduling suggestions</span>
+          </span>
+          <span class="bar-count">1 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill blue" style="width:20%"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" data-en="Most Promising Differentiating Selling Points" data-zh="最被看好的差异化卖点">Most Promising Differentiating Selling Points</div>
+
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Deep Scheduling–Payroll integration with seamless data sync" data-zh="Scheduling–Payroll 深度集成，数据无缝同步">Deep Scheduling–Payroll integration with seamless data sync</span></span>
+          <span class="bar-count">4 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:80%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text">
+            <span class="bar-main" data-en="POS integration" data-zh="POS 集成">POS integration</span>
+            <span class="bar-sub" data-en="using sales data to drive scheduling decisions" data-zh="以销售数据驱动排班决策">using sales data to drive scheduling decisions</span>
+          </span>
+          <span class="bar-count">4 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:80%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text">
+            <span class="bar-main" data-en="Compliance protection" data-zh="合规保护">Compliance protection</span>
+            <span class="bar-sub" data-en="Minor scheduling restrictions, Break Rule settings" data-zh="未成年排班限制、休息规则设置">Minor scheduling restrictions, Break Rule settings</span>
+          </span>
+          <span class="bar-count">3 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:60%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Self-serve configuration to lower rollout barriers" data-zh="自助配置，降低上线门槛">Self-serve configuration to lower rollout barriers</span></span>
+          <span class="bar-count">2 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:40%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main" data-en="Unified multi-location management" data-zh="统一多门店管理">Unified multi-location management</span></span>
+          <span class="bar-count">2 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill amber" style="width:40%"></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">
+          <span class="bar-text"><span class="bar-main zero" data-en="Other" data-zh="其他">Other</span></span>
+          <span class="bar-count zero">0 / 5</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill muted" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 Helpfulness -->
+  <div class="card-full">
+    <div class="card-title" data-en="How Much Would Each Improvement Help in Selling / Promoting Scheduling?" data-zh="各改进项对销售 / 推广的帮助程度（综合评级）">How Much Would Each Improvement Help in Selling / Promoting Scheduling?</div>
+    <div class="help-row">
+      <span class="help-label" data-en="Add key data visibility" data-zh="增加关键数据可见性">Add key data visibility</span>
+      <div class="help-track"><div class="help-fill teal" style="width:95%"></div></div>
+      <span class="help-rating" data-en="Extremely helpful" data-zh="非常有帮助">Extremely helpful</span>
+    </div>
+    <div class="help-row">
+      <span class="help-label" data-en="Optimize scheduling views" data-zh="优化排班视图">Optimize scheduling views</span>
+      <div class="help-track"><div class="help-fill teal" style="width:90%"></div></div>
+      <span class="help-rating" data-en="Extremely helpful" data-zh="非常有帮助">Extremely helpful</span>
+    </div>
+    <div class="help-row">
+      <span class="help-label" data-en="Improve shift management experience" data-zh="优化班次管理体验">Improve shift management experience</span>
+      <div class="help-track"><div class="help-fill teal" style="width:84%"></div></div>
+      <span class="help-rating" data-en="Very – Extremely" data-zh="很有帮助 – 非常有帮助">Very – Extremely</span>
+    </div>
+    <div class="help-row">
+      <span class="help-label" data-en="Expand POS integration" data-zh="扩展 POS 集成">Expand POS integration</span>
+      <div class="help-track"><div class="help-fill teal" style="width:78%"></div></div>
+      <span class="help-rating" data-en="Very – Extremely" data-zh="很有帮助 – 非常有帮助">Very – Extremely</span>
+    </div>
+    <div class="help-row">
+      <span class="help-label" data-en="Lower configuration barriers" data-zh="降低配置门槛">Lower configuration barriers</span>
+      <div class="help-track"><div class="help-fill teal" style="width:68%"></div></div>
+      <span class="help-rating" data-en="Very helpful" data-zh="很有帮助">Very helpful</span>
+    </div>
+    <div class="help-row">
+      <span class="help-label" data-en="Introduce AI assistance" data-zh="引入 AI 辅助">Introduce AI assistance</span>
+      <div class="help-track"><div class="help-fill teal" style="width:36%"></div></div>
+      <span class="help-rating" data-en="Slightly – Moderate" data-zh="略有帮助 – 一般">Slightly – Moderate</span>
+    </div>
+  </div>
+
+  <!-- Customer leads -->
+  <div class="card-full">
+    <div class="card-title" data-en="Potential Customer Leads (ready to pursue after improvements)" data-zh="潜在客户线索（完成改进后具备签单条件）">Potential Customer Leads (ready to pursue after improvements)</div>
+    <div class="customer-grid">
+      <div class="customer-card">
+        <div class="customer-loc-row">
+          <span class="customer-loc-num">5</span>
+          <span class="customer-loc-unit" data-en="locations" data-zh="门店">locations</span>
+        </div>
+        <div class="customer-name">Dream Bean</div>
+        <div class="customer-meta">
+          <span data-en="Source: CIS (RWRM7Ad)" data-zh="来源：CIS (RWRM7Ad)">Source: CIS (RWRM7Ad)</span>
+          &nbsp;·&nbsp; 2026-06-18
+        </div>
+      </div>
+      <div class="customer-card">
+        <div class="customer-loc-row">
+          <span class="customer-loc-num">37</span>
+          <span class="customer-loc-unit" data-en="locations" data-zh="门店">locations</span>
+        </div>
+        <div class="customer-name">Bacus Foods Corp</div>
+        <div class="customer-meta">
+          <span data-en="Source: CIS (o9oRAJP)" data-zh="来源：CIS (o9oRAJP)">Source: CIS (o9oRAJP)</span>
+          &nbsp;·&nbsp; <span data-en="Est. revenue: TBD" data-zh="预计收入待定">Est. revenue: TBD</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>
+      <span data-en="Data source:" data-zh="数据来源：">Data source:</span>
+      <a href="https://tally.so/r/eqojyk" target="_blank">Scheduling Product Feedback Survey (Tally)</a>
+      &nbsp;·&nbsp;
+      <span data-en="Collection period: 2026-06-18 to 2026-06-19" data-zh="采集时间：2026-06-18 至 2026-06-19">Collection period: 2026-06-18 to 2026-06-19</span>
+      &nbsp;·&nbsp;
+      <span data-en="Role: CIS (n=5)" data-zh="受访角色：CIS（n=5）">Role: CIS (n=5)</span>
+    </p>
+    <p style="margin-top:6px;" data-en="Auto-generated by Claude Code · For internal use only" data-zh="由 Claude Code 自动生成 · 仅供内部参考">Auto-generated by Claude Code · For internal use only</p>
+  </div>
+
+</div>
+<script>
+function setLang(lang, btn) {
+  document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+
+  document.querySelectorAll('[data-en]').forEach(function(el) {
+    el.textContent = el.getAttribute('data-' + lang);
+  });
+
+  var enFindings = document.querySelector('.findings-en');
+  var zhFindings = document.querySelector('.findings-zh');
+  if (lang === 'zh') {
+    enFindings.style.display = 'none';
+    zhFindings.style.display = 'block';
+  } else {
+    enFindings.style.display = 'block';
+    zhFindings.style.display = 'none';
+  }
+
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.title = lang === 'zh'
+    ? 'Scheduling 产品反馈报告 — 2026-06-22'
+    : 'Scheduling Product Feedback Report — 2026-06-22';
+}
+
+function downloadCSV() {
+  var csv = '"Submission ID","Respondent ID","Submitted at","What is your current role?","How confident are you in selling/implementing our Scheduling product?","What are the main factors affecting your current confidence? (Select up to 2)","What are the main factors affecting your current confidence? (Select up to 2) (Missing core features and blocked workflows)","What are the main factors affecting your current confidence? (Select up to 2) (The tool experience is not good enough)","What are the main factors affecting your current confidence? (Select up to 2) (High system configuration and rollout costs)","What are the main factors affecting your current confidence? (Select up to 2) (Lack of sufficient differentiated selling points)","What are the main factors affecting your current confidence? (Select up to 2) (Other)","Which specific business module is the problem?","Which specific business module is the problem? (Schedule creation)","Which specific business module is the problem? (Shift management (Open Shift management, Shift Swapping))","Which specific business module is the problem? (Time clock & attendance)","Which specific business module is the problem? (Timesheet approval)","Which specific business module is the problem? (Shift data display & analytics)","Which specific business module is the problem? (Other)","What mainly drives the high configuration cost?","What mainly drives the high configuration cost? (Multi-location setup requires repetitive configuration)","What mainly drives the high configuration cost? (High learning curve, difficult to get started)","What mainly drives the high configuration cost? (Compliance rule configuration is cumbersome)","What mainly drives the high configuration cost? (Other)","From the improvement areas below, please select the 3 you consider most urgent and that would most boost your confidence once completed:","From the improvement areas below, please select the 3 you consider most urgent and that would most boost your confidence once completed: (Expand POS integration — introduce store sales and labor data)","From the improvement areas below, please select the 3 you consider most urgent and that would most boost your confidence once completed: (Improve shift management experience — Open Shift/overtime notifications, allow fast Shift Swapping)","From the improvement areas below, please select the 3 you consider most urgent and that would most boost your confidence once completed: (Optimize scheduling views — support drag-and-drop, add monthly view and grouping)","From the improvement areas below, please select the 3 you consider most urgent and that would most boost your confidence once completed: (Add key data visibility — real-time hours tracking and summary)","From the improvement areas below, please select the 3 you consider most urgent and that would most boost your confidence once completed: (Lower configuration barriers — one-click multi-location setup, self-serve configuration)","From the improvement areas below, please select the 3 you consider most urgent and that would most boost your confidence once completed: (Introduce AI assistance — AI-powered queries and auto-scheduling suggestions)","Which of the following do you think are most likely to become our differentiating selling points for potential customers?","Which of the following do you think are most likely to become our differentiating selling points for potential customers? (Deep Scheduling–Payroll integration with seamless data sync)","Which of the following do you think are most likely to become our differentiating selling points for potential customers? (POS integration — using sales data to drive scheduling decisions)","Which of the following do you think are most likely to become our differentiating selling points for potential customers? (Compliance protection - Minor scheduling restrictions, Break Rule settings)","Which of the following do you think are most likely to become our differentiating selling points for potential customers? (Self-serve configuration to lower rollout barriers)","Which of the following do you think are most likely to become our differentiating selling points for potential customers? (Unified multi-location management)","Which of the following do you think are most likely to become our differentiating selling points for potential customers? (Other)","If we made the following improvements, how much would each one help you in selling / promoting Scheduling? [Expand POS integration — introduce store sales and labor data]","If we made the following improvements, how much would each one help you in selling / promoting Scheduling? [Improve shift management experience — Open Shift/overtime notifications, allow fast Shift Swapping]","If we made the following improvements, how much would each one help you in selling / promoting Scheduling? [Optimize scheduling views — support drag-and-drop, add monthly view and grouping]","If we made the following improvements, how much would each one help you in selling / promoting Scheduling? [Add key data visibility — real-time hours tracking and summary]","If we made the following improvements, how much would each one help you in selling / promoting Scheduling? [Lower configuration barriers — one-click multi-location setup, self-serve configuration]","If we made the following improvements, how much would each one help you in selling / promoting Scheduling? [Introduce AI assistance — AI-powered queries and auto-scheduling suggestions]","Assuming we complete the key improvements above — Do you currently have any Scheduling customers that could potentially be signed?","Customer name","Customer scale / number of locations","Estimated monthly revenue"\n"RWRMyNK","0QkEKM0","2026-06-18 19:27:15","CIS","6","Missing core features and blocked workflows, The tool experience is not good enough","true","true","false","false","false","Timesheet approval, Shift data display & analytics, Shift management (Open Shift management, Shift Swapping)","false","true","false","true","true","false","","","","","","Expand POS integration — introduce store sales and labor data, Add key data visibility — real-time hours tracking and summary, Lower configuration barriers — one-click multi-location setup, self-serve configuration","true","false","false","true","true","false","Deep Scheduling–Payroll integration with seamless data sync, POS integration — using sales data to drive scheduling decisions, Compliance protection - Minor scheduling restrictions, Break Rule settings","true","true","true","false","false","false","Extremely helpful","Very helpful","Very helpful","Extremely helpful","Moderately helpful","Moderately helpful","No","","",""\n"RWRM7Ad","xXzdkYr","2026-06-18 20:02:11","CIS","5","Missing core features and blocked workflows","true","false","false","false","false","Notifications, Shift management (Open Shift management, Shift Swapping), Shift data display & analytics","false","true","false","false","true","true","","","","","","Improve shift management experience — Open Shift/overtime notifications, allow fast Shift Swapping, Expand POS integration — introduce store sales and labor data, Introduce AI assistance — AI-powered queries and auto-scheduling suggestions","true","true","false","false","false","true","Deep Scheduling–Payroll integration with seamless data sync, Self-serve configuration to lower rollout barriers, POS integration — using sales data to drive scheduling decisions","true","true","false","true","false","false","Extremely helpful","Extremely helpful","Very helpful","Extremely helpful","Very helpful","Extremely helpful","Yes","Dream Bean","5",""\n"o9oRAJP","jazMPlJ","2026-06-18 21:09:28","CIS","8","Missing core features and blocked workflows, Lack of resources to demo and teach the product","true","false","false","false","true","Shift management (Open Shift management, Shift Swapping), Schedule creation, Shift data display & analytics","true","true","false","false","true","false","","","","","","Optimize scheduling views — support drag-and-drop, add monthly view and grouping, Lower configuration barriers — one-click multi-location setup, self-serve configuration, Expand POS integration — introduce store sales and labor data","true","false","true","false","true","false","Deep Scheduling–Payroll integration with seamless data sync, POS integration — using sales data to drive scheduling decisions, Unified multi-location management","true","true","false","false","true","false","Very helpful","Slightly helpful","Extremely helpful","Moderately helpful","Very helpful","Slightly helpful","Yes","Bacus Foods Corp","37 locations","Unsure"\n"vX4DO4l","obzBA2e","2026-06-18 21:34:25","CIS","6","Missing core features and blocked workflows, The tool experience is not good enough","true","true","false","false","false","Schedule creation, Shift management (Open Shift management, Shift Swapping), Time clock & attendance","true","true","true","false","false","false","","","","","","Expand POS integration — introduce store sales and labor data, Improve shift management experience — Open Shift/overtime notifications, allow fast Shift Swapping, Optimize scheduling views — support drag-and-drop, add monthly view and grouping","true","true","true","false","false","false","Self-serve configuration to lower rollout barriers, POS integration — using sales data to drive scheduling decisions, Compliance protection - Minor scheduling restrictions, Break Rule settings","false","true","true","true","false","false","Very helpful","Extremely helpful","Extremely helpful","Extremely helpful","Extremely helpful","Moderately helpful","No","","",""\n"Arxvzdl","b5zO86Z","2026-06-19 06:23:20","CIS","6","The tool experience is not good enough, Lack of sufficient differentiated selling points","false","true","false","true","false","","","","","","","","","","","","","Add key data visibility — real-time hours tracking and summary, Optimize scheduling views — support drag-and-drop, add monthly view and grouping, Improve shift management experience — Open Shift/overtime notifications, allow fast Shift Swapping","false","true","true","true","false","false","Unified multi-location management, Compliance protection - Minor scheduling restrictions, Break Rule settings, Deep Scheduling–Payroll integration with seamless data sync","true","false","true","false","true","false","Moderately helpful","Extremely helpful","Extremely helpful","Extremely helpful","Very helpful","Slightly helpful","No","","",""';
+
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'Scheduling Product Feedback_Submissions_2026-06-22.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
